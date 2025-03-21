@@ -160,33 +160,33 @@ export default function SentimentAnalyzer() {
                 });
             }
 
-            // Update chart data
-            const newGeminiData = [...chartData.datasets[0].data];
-            const newCustomData = [...chartData.datasets[1].data];
+            // Reset chart data and set only current analysis
+            const newGeminiData = [0, 0, 0];
+            const newCustomData = [0, 0, 0];
 
-            // Update Gemini counts
+            // Update Gemini counts for current analysis only
             switch (data.sentiment.toLowerCase()) {
                 case 'positive':
-                    newGeminiData[0]++;
+                    newGeminiData[0] = 1;
                     break;
                 case 'neutral':
-                    newGeminiData[1]++;
+                    newGeminiData[1] = 1;
                     break;
                 case 'negative':
-                    newGeminiData[2]++;
+                    newGeminiData[2] = 1;
                     break;
             }
 
-            // Update Custom counts separately
+            // Update Custom counts for current analysis only
             switch (customAnalysisResult.sentiment.toLowerCase()) {
                 case 'positive':
-                    newCustomData[0]++;
+                    newCustomData[0] = 1;
                     break;
                 case 'neutral':
-                    newCustomData[1]++;
+                    newCustomData[1] = 1;
                     break;
                 case 'negative':
-                    newCustomData[2]++;
+                    newCustomData[2] = 1;
                     break;
             }
 
@@ -219,10 +219,7 @@ export default function SentimentAnalyzer() {
 
     const handleExampleClick = (exampleText) => {
         setText(exampleText);
-        
-        // Only update the chart data after actual analysis
-        // Don't pre-populate counts for examples
-        // This fixes the duplicate counting issue
+        // Don't analyze here, wait for the user to click the analyze button
     };
 
     // Make handleExampleClick available globally
