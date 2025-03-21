@@ -1,6 +1,7 @@
 'use client';
 
 import TwitterAnalyzer from '@/app/components/TwitterAnalyzer';
+import Navbar from '@/app/components/Navbar';
 
 export default function TwitterAnalysisPage() {
     const examples = [
@@ -23,7 +24,8 @@ export default function TwitterAnalysisPage() {
 
     return (
         <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-            <div className="py-8">
+            <Navbar />
+            <div className="pt-32 pb-20">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center">
                         <h1 className="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl">
@@ -35,7 +37,7 @@ export default function TwitterAnalysisPage() {
                     </div>
                 </div>
             </div>
-            <div id="twitter-analyzer" className="mt-8">
+            <div id="twitter-analyzer" className="mb-20">
                 <TwitterAnalyzer />
             </div>
         </div>
