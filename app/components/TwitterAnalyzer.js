@@ -167,11 +167,11 @@ export default function TwitterAnalyzer() {
                     customAnalysis: analyzeSentiment(tweet.text)
                 }));
 
-                // Calculate sentiment counts for both analyses
+                // Reset counts for new analysis
                 const newGeminiData = [0, 0, 0];  // [positive, neutral, negative]
                 const newCustomData = [0, 0, 0];
 
-                // Count Gemini results
+                // Count Gemini results for the current analysis only
                 data.tweets.forEach(tweet => {
                     switch (tweet.sentiment.toLowerCase()) {
                         case 'positive':
@@ -186,7 +186,7 @@ export default function TwitterAnalyzer() {
                     }
                 });
 
-                // Count Custom results
+                // Count Custom results for the current analysis only
                 customAnalysis.forEach(tweet => {
                     switch (tweet.customAnalysis.sentiment.toLowerCase()) {
                         case 'positive':
@@ -302,8 +302,6 @@ export default function TwitterAnalyzer() {
     };
 
     const handleExampleClick = (tweet) => {
-        // Don't pre-populate counts for examples
-        // Only update after actual analysis
         const customAnalysisResult = analyzeSentiment(tweet.text);
         
         setResult({
@@ -326,6 +324,54 @@ export default function TwitterAnalyzer() {
                 customAnalysis: customAnalysisResult
             }]
         });
+
+        // Reset chart data and set for current example only
+        const newGeminiData = [0, 0, 0];
+        const newCustomData = [0, 0, 0];
+
+        // Update Gemini counts
+        switch (tweet.sentiment.toLowerCase()) {
+            case 'positive':
+                newGeminiData[0] = 1;
+                break;
+            case 'neutral':
+                newGeminiData[1] = 1;
+                break;
+            case 'negative':
+                newGeminiData[2] = 1;
+                break;
+            case 'mixed':
+                // For mixed sentiment, consider it neutral
+                newGeminiData[1] = 1;
+                break;
+        }
+
+        // Update Custom counts
+        switch (customAnalysisResult.sentiment.toLowerCase()) {
+            case 'positive':
+                newCustomData[0] = 1;
+                break;
+            case 'neutral':
+                newCustomData[1] = 1;
+                break;
+            case 'negative':
+                newCustomData[2] = 1;
+                break;
+        }
+
+        setChartData(prev => ({
+            ...prev,
+            datasets: [
+                {
+                    ...prev.datasets[0],
+                    data: newGeminiData,
+                },
+                {
+                    ...prev.datasets[1],
+                    data: newCustomData,
+                }
+            ],
+        }));
 
         // Scroll to results area with smooth animation
         const resultsArea = document.getElementById('twitter-analysis-results');
