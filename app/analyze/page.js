@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import SentimentAnalyzer from '../components/SentimentAnalyzer';
+import Navbar from '../components/Navbar';
 
 const ExampleSection = () => {
     const examples = [
@@ -86,8 +87,9 @@ const ExampleCard = ({ text, category, context }) => {
 
 export default function AnalyzePage() {
     return (
-        <div className="min-h-screen bg-gradient-to-br from-white via-blue-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-24">
-            <div className="container mx-auto px-6">
+        <div className="min-h-screen bg-gradient-to-br from-white via-blue-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+            <Navbar />
+            <div className="container mx-auto px-6 pt-32 pb-20">
                 <div className="text-center mb-12">
                     <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">Sentiment Analysis</h1>
                     <p className="text-gray-900 dark:text-gray-300">
