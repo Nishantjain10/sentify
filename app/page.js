@@ -2,8 +2,8 @@
 
 import { useRouter } from 'next/navigation';
 import Image from "next/image";
-import ThemeToggle from './components/ThemeToggle';
 import { useState, useEffect } from 'react';
+import Navbar from './components/Navbar';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -350,34 +350,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-white via-blue-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       {/* Navigation */}
-      <nav className="fixed w-full bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg z-50 py-4 border-b border-gray-200 dark:border-gray-800 shadow-sm">
-        <div className="container mx-auto px-6 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold">S</span>
-            </div>
-            <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              Sentify
-            </span>
-          </div>
-          <div className="flex items-center gap-8">
-            <div className="hidden md:flex gap-6">
-              <a href="#features" className="text-gray-900 hover:text-blue-600 transition-colors dark:text-gray-300 dark:hover:text-blue-400">Features</a>
-              <a href="#demo" className="text-gray-900 hover:text-blue-600 transition-colors dark:text-gray-300 dark:hover:text-blue-400">Demo</a>
-              <a href="/analyze/twitter" className="text-gray-900 hover:text-blue-600 transition-colors dark:text-gray-300 dark:hover:text-blue-400">Twitter Analysis</a>
-            </div>
-            <div className="flex items-center gap-4">
-              <ThemeToggle />
-              <button 
-                onClick={handleGetStarted}
-                className="bg-blue-600 text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 transition-all duration-200 transform hover:scale-105 shadow-md hover:shadow-xl"
-              >
-                Get Started
-              </button>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-6 relative overflow-hidden">
@@ -401,9 +374,7 @@ export default function Home() {
               className="bg-blue-600 text-white px-8 py-4 rounded-xl text-lg hover:bg-blue-700 transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-2xl flex items-center gap-2"
             >
               <span>Start Analyzing</span>
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
+
             </button>
             <button 
               onClick={() => document.getElementById('demo').scrollIntoView({ behavior: 'smooth' })}
